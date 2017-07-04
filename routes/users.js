@@ -48,15 +48,18 @@ router.post('/register', function(req, res){
 });
 
 passport.use(new LocalStrategy(function(username, password, done){
-  User.findByUser(username, function(err, user){
-    if(err) return done(err);
+  process.nextTick(function () {
+    User.findByUser(username, function(err, user){
+      if(err) return done(err);
 
-    if(user){
-      console.log(user.username, user.password);
-      if(user.password != '' && bcrypt.compareSync(password, user.password)) return done(null, user);
-    }
+      if(user){
+        console.log(user.username, user.password);
+        if(user.password != '' && bcrypt.compareSync(password, user.password)) return done(null, user);
+      };
+
       return done(null, false, {message: 'Invalid password'});
-    });
+      });
+  });
 }));
 
 passport.serializeUser(function(user, done){
@@ -79,7 +82,7 @@ router.post('/login', passport.authenticate('local', {successRedirect:'/', failu
 // Logout
 router.get('/logout', function(req, res){
   req.logout();
-  req.flash('success_msg', 'You are logged out');
+  //req.flash('success_msg', 'You are logged out');
   res.redirect('/users/login');
 });
 
