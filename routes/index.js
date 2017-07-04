@@ -1,10 +1,22 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
+var pg = require('pg');
+var connectionString = 
 
 // Get Homepage
 router.get('/', function(req, res){
   res.render('index');
+  var query = client.query("SELECT * FROM collections");
+  var results = [];
+  query.on('row',function(row){
+  	results.push(row);
+  });
+  
+  query.on('end',function(){
+  	client.end();
+  	response.json(results);
+  	});
 });
 
 // Men
