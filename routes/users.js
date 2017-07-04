@@ -17,6 +17,21 @@ router.get('/login', function(req, res){
   res.render('login');
 });
 
+// Men
+router.get('/men', function(req, res){
+  res.render('men');
+});
+
+// Women
+router.get('/women', function(req, res){
+  res.render('women');
+});
+
+// Kid
+router.get('/kid', function(req, res){
+  res.render('kid');
+});
+
 // Register user
 router.post('/register', function(req, res){
   var username = req.body.username;

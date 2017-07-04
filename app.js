@@ -17,6 +17,15 @@ var users = require('./routes/users');
 // Init app
 var app = express();
 
+// Brute force https in herokuapp
+// app.use(function (req, res, next) {
+//     if (req.headers['x-forwarded-proto'] !== 'https') {
+//         let https = ['https://nwen304project.herokuapp.com/', req.url].join('');
+//         return res.redirect(https);
+//     }
+//     return next();
+// });
+
 // View Engine
 app.set('views', path.join(__dirname, 'views'));
 app.engine('handlebars', exphbs({defaultLayout: 'layout'}));

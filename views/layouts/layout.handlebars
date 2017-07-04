@@ -11,10 +11,20 @@
       <div class="header clearfix">
         <nav>
           <ul class="nav nav-pills pull-right">
+            {{#if user}}
             <li role="presentation"><a href="/">Home</a></li>
+            <li role="presentation"><a href="/users/men">Mens</a></li>
+            <li role="presentation"><a href="/users/women">Womens</a></li>
+            <li role="presentation"><a href="/users/kid">Kids</a></li>
+            <li role="presentation"><a href="/users/login">Logout</a></li>
+            {{else}}
+            <li role="presentation"><a href="/">Home</a></li>
+            <li role="presentation"><a href="/users/men">Mens</a></li>
+            <li role="presentation"><a href="/users/women">Womens</a></li>
+            <li role="presentation"><a href="/users/kid">Kids</a></li>
             <li role="presentation"><a href="/users/login">Login</a></li>
-			<li role="presentation"><a href="/users/login">Logout</a></li>
             <li role="presentation"><a href="/users/register">Register an account</a></li>
+            {{/if}}
           </ul>
         </nav>
         <h3 class="text-muted">Shop-Around</h3>
