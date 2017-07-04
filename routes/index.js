@@ -1,8 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
-var pg = require('pg');
-var connectionString = 
+
 
 // Get Homepage
 router.get('/', function(req, res){
