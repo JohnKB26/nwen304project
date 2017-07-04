@@ -17,21 +17,6 @@ router.get('/login', function(req, res){
   res.render('login');
 });
 
-// Men
-router.get('/men', function(req, res){
-  res.render('men');
-});
-
-// Women
-router.get('/women', function(req, res){
-  res.render('women');
-});
-
-// Kid
-router.get('/kid', function(req, res){
-  res.render('kid');
-});
-
 // Register user
 router.post('/register', function(req, res){
   var username = req.body.username;
@@ -63,26 +48,39 @@ router.post('/register', function(req, res){
 });
 
 passport.use(new LocalStrategy(function(username, password, done){
-  User.getUserByUsername(username, function(err, user){
-    if(err) throw err;
-    if(!user){
-      return done(null, false, {message: 'Unkown User'});
-    }
+  User.findByUser(username, function(err, user){
+    if(err) return done(err);
 
-    User.comparePassword(password, user.password, function(err, isMatch){
-      if(err) throw err;
-      if(isMatch){
-        return done(null, user);
-      }
-      else{
-        return done(null, false, {message: 'Invalid password'});
-      }
+    if(user){
+      console.log(user.username, user.password);
+      if(user.password != '' && bcrypt.compareSync(password, user.password)) return done(null, user);
+    }
+      return done(null, false, {message: 'Invalid password'});
     });
-  });
 }));
 
+passport.serializeUser(function(user, done){
+  console.log('serializeUser: ' + user.userId);
+  done(null, user.userId);
+});
+
+passport.deserializeUser(function(id, done){
+  console.log('deserializeUser: ' + id);
+  User.findOne(id, function(err, user){
+    done(null, user);
+  });
+});
+
+// Login
 router.post('/login', passport.authenticate('local', {successRedirect:'/', failureRedirect:'/users/login',failureFlash: true}), function(req, res) {
   res.redirect('/');
+});
+
+// Logout
+router.get('/logout', function(req, res){
+  req.logout();
+  req.flash('success_msg', 'You are logged out');
+  res.redirect('/users/login');
 });
 
 module.exports = router;

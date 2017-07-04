@@ -4,7 +4,7 @@ var client;
 
 function connectDB(){
   client = new pg.Client(db.connectionString);
-  // client.on('drain', client.end.bind(client));
+  client.on('drain', client.end.bind(client));
   client.connect();
 }
 
@@ -26,13 +26,17 @@ User.findByUser = function(username, callback){
   connectDB();
   console.log('Finding user by username');
 
-  client.query("SELECT * FROM users WHERE username=$1;", [email], function(err, result){
+  client.query("SELECT * FROM users WHERE username=$1;", [username], function(err, result){
     if(err) return callback(err, null);
 
     if(result.rows.length > 0)return callback(err, buildUser(result));
 
     return callback(null, null);
   });
+}
+
+User.findOne = function(id, callback){
+  User.findById(id, callback);
 }
 
 function buildUser(result){
