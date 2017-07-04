@@ -1,0 +1,29 @@
+{
+ "name": "nwen304group-project",
+ "version": "1.0.0",
+ "description": "",
+ "main": "app.js",
+ "dependencies": {
+  "bcrypt-nodejs": "0.0.3",
+  "body-parser": "*",
+  "connect-flash": "*",
+  "cookie-parser": "^1.4.1",
+  "express": "*",
+  "express-handlebars": "*",
+  "express-messages": "*",
+  "express-session": "*",
+  "express-validator": "*",
+  "morgan": "^1.8.2",
+  "multer": "^1.3.0",
+  "path": "^0.12.7",
+  "pg": "^6.4.0",
+  "passport": "*",
+  "passport-http": "*",
+  "passport-local": "*"
+ },
+ "scripts": {
+  "start": "node app.js"
+ },
+ "author": "GROUP12",
+ "license": "ISC"
+}

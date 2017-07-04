@@ -1,0 +1,21 @@
+<h2 class="page-header">Register Your Own Account</h2>
+<form method="post" action="/users/register">
+	<div class="form-group">
+		<label>Username</label>
+		<input type="text" class="form-control" placeholder="Enter Username" name="username" required>
+	</div>
+	<div class="form-group">
+		<label>Password</label>
+		<input type="password" class="form-control" placeholder="Enter Password" name="password" required>
+	</div>
+	<div class="form-group">
+		<label>Confirm Password</label>
+		<input type="password" class="form-control" placeholder="Enter Your Password Again" name="password2" required>
+	</div>
+	{{#if errors}}
+		{{#each errors}}
+			<div class="alert alert-danger">{{msg}}</div>
+		{{/each}}
+	{{/if}}
+	<button type="submit" class="btn btn-default">Create</button>
+</form>
