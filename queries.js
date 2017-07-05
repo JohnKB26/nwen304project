@@ -9,7 +9,7 @@ function getAll(req, res, next){
   client.connect();
 
   var result = [];
-  var query = client.query("SELECT * FROM testtable");
+  var query = client.query("SELECT * FROM collections");
 
   query.on('rows', function (rows) {
     result.push(rows);
