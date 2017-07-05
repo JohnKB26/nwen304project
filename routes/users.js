@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var db = require('../queries');
 // User model
 var User = require('../models/user');
 // Use for password hash
@@ -85,5 +86,7 @@ router.get('/logout', function(req, res){
   //req.flash('success_msg', 'You are logged out');
   res.redirect('/users/login');
 });
+
+// router.get('index/:all', db.getAll);
 
 module.exports = router;

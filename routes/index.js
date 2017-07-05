@@ -1,21 +1,19 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
+var pg = require('pg');
+var db = require('../queries');
+var client;
 
+function connectDB(){
+  client = new pg.Client(db.connectionString);
+  client.on('drain', client.end.bind(client));
+  client.connect();
+}
 
 // Get Homepage
 router.get('/', function(req, res){
   res.render('index');
-  var query = client.query("SELECT * FROM collections");
-  var results = [];
-  query.on('row',function(row){
-  	results.push(row);
-  });
-  
-  query.on('end',function(){
-  	client.end();
-  	response.json(results);
-  	});
 });
 
 // Men

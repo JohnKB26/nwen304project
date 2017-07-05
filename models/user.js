@@ -2,11 +2,11 @@ var pg = require('pg');
 var db = require('../queries');
 var client;
 
-function connectDB(){
-  client = new pg.Client(db.connectionString);
-  client.on('drain', client.end.bind(client));
-  client.connect();
-}
+// function connectDB(){
+//   client = new pg.Client(db.connectionString);
+//   client.on('drain', client.end.bind(client));
+//   client.connect();
+// }
 
 function User(){
   this.username = '';
